@@ -1,0 +1,23 @@
+svg{
+    border: thin black solid;
+  }
+  svg path, line {
+    fill: none;
+    stroke: black;
+    width: 1px;
+  }
+  svg text {
+    font: 8px Verdana;
+  }
+  .rowFlex{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px;
+  }
+  p{
+    padding: 10px;
+  }
+  input{
+    height: 20px;
+  }
