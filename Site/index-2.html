@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="http://d3js.org/d3.v7.min.js"> </script>
+  </head>
+  <body>
+    <div class="menu"> 
+      <div class="nav"> <a href="index.html">Каталог</a><a class="selected" href="index-2.html">Топ самых читаемых</a><a href="#">Новинки</a><a href="#">Обсуждения</a>
+      </div>
+      <div class="find">
+        <form action=""> 
+          <input type="text" name="text&quot;" placeholder="Поиск книг или авторов"/>
+          <input class="button" type="button" value="Найти"/>
+        </form>
+      </div>
+    </div>
+    <div class="main-block"> 
+      <div class="content"> 
+        <div class="first-table"> 
+          <details>
+            <summary> &Gcy;&rcy;&acy;&fcy;&icy;&kcy; </summary>
+            <form>
+              <table>
+                <tr>
+                  <th>&Zcy;&ncy;&acy;&chcy;&iecy;&ncy;&icy;e &pcy;&ocy; &ocy;&scy;&icy; OX</th>
+                  <th>&Rcy;&iecy;&zcy;&ucy;&lcy;&softcy;&tcy;&acy;&tcy;</th>
+                </tr>
+                <tr></tr>
+                <td>
+                  <input type="radio" name="ox" value="Жанр"/>&ZHcy;&acy;&ncy;&rcy;<br/>
+                  <input type="radio" name="ox" value="Язык"/>&YAcy;&zcy;&ycy;&kcy;<br/>
+                </td>
+                <td>
+                  <input type="checkbox" name="sales_max" value="0"/>Максимальный год<br/>
+                  <input type="checkbox" name="sales_min" value="1"/>Минимальный год<br/>
+                </td>
+              </table>
+              <input type="button" id="graphbut" value="Построить" onclick="drawGraph(this.form)">
+            </form>
+          </details>
+          <details>
+            <summary> &Fcy;&icy;&lcy;&softcy;&tcy;&rcy;</summary>
+            <form>
+              <table>
+                <tr>
+                  <td> 
+                    <label for="structure">&Ncy;&acy;&zcy;&vcy;&acy;&ncy;&icy;&iecy;:</label>
+                  </td>
+                  <td> 
+                    <input type="text" name="filter"/>
+                  </td>
+                  <td> </td>
+                  <td></td>
+                </tr>
+                <tr> 
+                  <td>
+                    <label for="category">&ZHcy;&acy;&ncy;&rcy;:</label>
+                  </td>
+                  <td> 
+                    <input type="text" name="filter"/>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="country">&YAcy;&zcy;&ycy;&kcy;:</label>
+                  </td>
+                  <td>
+                    <input type="text" name="filter"/>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="city">&Acy;&vcy;&tcy;&ocy;&rcy;:</label>
+                  </td>
+                  <td>
+                    <input type="text" name="filter"/>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="yFrom">&Gcy;&ocy;&dcy;: &ocy;&tcy;</label>
+                  </td>
+                  <td>
+                    <input type="text" name="filter"/>
+                  </td>
+                  <td>
+                    <p>до</p>
+                  </td>
+                  <td> 
+                    <input type="text" name="filter"/>
+                  </td>
+                </tr>
+              </table>
+              <input type="button" id="buttonFilter" value="Найти"/>
+            </form>
+          </details>
+          <details>
+            <summary>&Scy;&ocy;&rcy;&tcy;&icy;&rcy;&ocy;&vcy;&kcy;&acy;</summary>
+            <form>
+              <p>&Pcy;&iecy;&rcy;&vcy;&ycy;&jcy; &ucy;&rcy;&ocy;&vcy;&iecy;&ncy;:
+                <select name="sortFirst">
+                  <option value="0">&Ncy;&iecy;&tcy;</option>
+                  <option value="1">&Ncy;&acy;&zcy;&vcy;&acy;&ncy;&icy;&iecy;</option>
+                  <option value="2">&ZHcy;&acy;&ncy;&rcy;</option>
+                  <option value="3">&YAcy;&zcy;&ycy;&kcy;</option>
+                  <option value="4">&Acy;&vcy;&tcy;&ocy;&rcy;</option>
+                  <option value="5">&Gcy;&ocy;&dcy;</option>
+                </select>          &pcy;&ocy; &ucy;&bcy;&ycy;&vcy;&acy;&ncy;&icy;&yucy;? 
+                <input type="checkbox" name="desc"/>
+              </p>
+              <p>&Vcy;&tcy;&ocy;&rcy;&ocy;&jcy; &ucy;&rcy;&ocy;&vcy;&iecy;&ncy;&softcy;:
+                <select name="sortSecond">
+                  <option value="0">&Ncy;&iecy;&tcy;</option>
+                  <option value="1">&Ncy;&acy;&zcy;&vcy;&acy;&ncy;&icy;&iecy;</option>
+                  <option value="2">&ZHcy;&acy;&ncy;&rcy;</option>
+                  <option value="3">&YAcy;&zcy;&ycy;&kcy;</option>
+                  <option value="4">&Acy;&vcy;&tcy;&ocy;&rcy;</option>
+                  <option value="5">&Gcy;&ocy;&dcy;</option>
+                </select>          &pcy;&ocy; &ucy;&bcy;&ycy;&vcy;&acy;&ncy;&icy;&yucy;? 
+                <input type="checkbox" name="desc"/>
+              </p>
+              <p>&Tcy;&rcy;&iecy;&tcy;&icy;&jcy; &ucy;&rcy;&ocy;&vcy;&iecy;&ncy;&softcy;:
+                <select name="sortThird">
+                  <option value="0">&Ncy;&iecy;&tcy;</option>
+                  <option value="1">&Ncy;&acy;&zcy;&vcy;&acy;&ncy;&icy;&iecy;</option>
+                  <option value="2">&ZHcy;&acy;&ncy;&rcy;</option>
+                  <option value="3">&YAcy;&zcy;&ycy;&kcy;</option>
+                  <option value="4">&Acy;&vcy;&tcy;&ocy;&rcy;</option>
+                  <option value="5">&Gcy;&ocy;&dcy;</option>
+                </select>          &pcy;&ocy; &ucy;&bcy;&ycy;&vcy;&acy;&ncy;&icy;&yucy;? 
+                <input type="checkbox" name="desc"/>
+              </p>
+              <input type="button" id="buttonSort" value="Сортировать"/>
+            </form>
+          </details>
+        </div>
+        <svg></svg>
+        <div class="main-table">
+          <table border="1" cellspacing="0" cellpadding="5">
+            <tr>
+              <th>&Ncy;&acy;&zcy;&vcy;&acy;&ncy;&icy;&iecy;</th>
+              <th>&ZHcy;&acy;&ncy;&rcy;</th>
+              <th>&YAcy;&zcy;&ycy;&kcy;</th>
+              <th>&Acy;&vcy;&tcy;&ocy;&rcy;</th>
+              <th>&Gcy;&ocy;&dcy;</th>
+            </tr>
+            <tr>
+              <td>&Acy;&lcy;&khcy;&icy;&mcy;&icy;&kcy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Bcy;&rcy;&acy;&zcy;&icy;&lcy;&softcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Pcy;&acy;&ucy;&lcy;&ocy; &Kcy;&ocy;&ecy;&lcy;&softcy;&ocy;</td>
+              <td>1988</td>
+            </tr>
+            <tr>
+              <td>&Zcy;&iecy;&lcy;&iecy;&ncy;&acy;&yacy; &mcy;&icy;&lcy;&yacy;</td>
+              <td>&Dcy;&rcy;&acy;&mcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Scy;&tcy;&icy;&vcy;&iecy;&ncy; &Kcy;&icy;&ncy;&gcy;</td>
+              <td>1996</td>
+            </tr>
+            <tr>
+              <td>&Gcy;&ocy;&lcy;&ocy;&dcy;&ncy;&ycy;&iecy; &icy;&gcy;&rcy;&ycy;</td>
+              <td>&Acy;&ncy;&tcy;&icy;&ucy;&tcy;&ocy;&pcy;&icy;&yacy;, &ncy;&acy;&ucy;&chcy;&ncy;&acy;&yacy; &fcy;&acy;&ncy;&tcy;&acy;&scy;&tcy;&icy;&kcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Scy;&tcy;&yucy;&zcy;&iecy;&ncy; &Kcy;&ocy;&lcy;&lcy;&icy;&ncy;&zcy;</td>
+              <td>2010</td>
+            </tr>
+            <tr>
+              <td>451 &gcy;&rcy;&acy;&dcy;&ucy;&scy; &pcy;&ocy; &Fcy;&acy;&rcy;&iecy;&ncy;&gcy;&iecy;&jcy;&tcy;&ucy;</td>
+              <td>&Acy;&ncy;&tcy;&icy;&ucy;&tcy;&ocy;&pcy;&icy;&yacy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Rcy;&iecy;&jcy; &Bcy;&rcy;&iecy;&dcy;&bcy;&iecy;&rcy;&icy;</td>
+              <td>1953</td>
+            </tr>
+            <tr>
+              <td>&Tcy;&rcy;&icy; &tcy;&ocy;&vcy;&acy;&rcy;&icy;&shchcy;&acy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Ncy;&iecy;&mcy;&iecy;&tscy;&kcy;&icy;&jcy;</td>
+              <td>&Ecy;&rcy;&icy;&khcy; &Mcy;&acy;&rcy;&icy;&yacy; &Rcy;&iecy;&mcy;&acy;&rcy;&kcy;</td>
+              <td>1936</td>
+            </tr>
+            <tr>
+              <td>&Mcy;&acy;&scy;&tcy;&iecy;&rcy; &icy; &Mcy;&acy;&rcy;&gcy;&acy;&rcy;&icy;&tcy;&acy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Rcy;&ucy;&scy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Mcy;&icy;&khcy;&acy;&icy;&lcy; &Bcy;&ucy;&lcy;&gcy;&acy;&kcy;&ocy;&vcy;</td>
+              <td>1966</td>
+            </tr>
+            <tr>
+              <td>&Gcy;&acy;&rcy;&rcy;&icy; &Pcy;&ocy;&tcy;&tcy;&iecy;&rcy; &icy; &fcy;&icy;&lcy;&ocy;&scy;&ocy;&vcy;&scy;&kcy;&icy;&jcy; &kcy;&acy;&mcy;&iecy;&ncy;&softcy;</td>
+              <td>&Fcy;&iecy;&ncy;&tcy;&iecy;&zcy;&icy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&ocy;&acy;&ncy; &Rcy;&ocy;&acy;&lcy;&icy;&ncy;&gcy;</td>
+              <td>1997</td>
+            </tr>
+            <tr>
+              <td>1984</td>
+              <td>&Acy;&ncy;&tcy;&icy;&ucy;&tcy;&ocy;&pcy;&icy;&yacy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&ocy;&rcy;&dcy;&zhcy; &Ocy;&rcy;&ucy;&ecy;&lcy;&lcy;</td>
+              <td>1948</td>
+            </tr>
+            <tr>
+              <td>&Rcy;&ocy;&bcy;&icy;&ncy;&zcy;&ocy;&ncy; &Kcy;&rcy;&ucy;&zcy;&ocy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&ecy;&ncy;&icy;&ecy;&lcy; &Dcy;&iecy;&fcy;&ocy;</td>
+              <td>1719</td>
+            </tr>
+            <tr>
+              <td>&Ncy;&acy;&dcy; &pcy;&rcy;&ocy;&pcy;&acy;&scy;&tcy;&softcy;&yucy; &vcy;&ocy; &rcy;&zhcy;&icy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&iecy;&rcy;&ocy;&mcy; &Scy;&ecy;&lcy;&icy;&ncy;&dcy;&zhcy;&iecy;&rcy;</td>
+              <td>1951</td>
+            </tr>
+            <tr>
+              <td>&Pcy;&icy;&kcy;&ncy;&icy;&kcy; &ncy;&acy; &ocy;&bcy;&ocy;&chcy;&icy;&ncy;&iecy;</td>
+              <td>&Ncy;&acy;&ucy;&chcy;&ncy;&acy;&yacy; &fcy;&acy;&ncy;&tcy;&acy;&scy;&tcy;&icy;&kcy;&acy;</td>
+              <td>&Rcy;&ucy;&scy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Bcy;&rcy;&acy;&tcy;&softcy;&yacy; &Scy;&tcy;&rcy;&ucy;&gcy;&acy;&tscy;&kcy;&icy;&iecy;</td>
+              <td>1971</td>
+            </tr>
+            <tr>
+              <td>&Ucy;&bcy;&icy;&tcy;&softcy; &pcy;&iecy;&rcy;&iecy;&scy;&mcy;&iecy;&shcy;&ncy;&icy;&kcy;&acy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&KHcy;&acy;&rcy;&pcy;&iecy;&rcy; &Lcy;&icy;</td>
+              <td>1960</td>
+            </tr>
+            <tr>
+              <td>&Acy;&ncy;&ncy;&acy; &Kcy;&acy;&rcy;&iecy;&ncy;&icy;&ncy;&acy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Rcy;&ucy;&scy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Lcy;&iecy;&vcy; &Tcy;&ocy;&lcy;&scy;&tcy;&ocy;&jcy;</td>
+              <td>1877</td>
+            </tr>
+            <tr>
+              <td>&Mcy;&acy;&rcy;&tcy;&icy;&ncy; &Icy;&dcy;&iecy;&ncy;</td>
+              <td>&Dcy;&rcy;&acy;&mcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&iecy;&kcy; &Lcy;&ocy;&ncy;&dcy;&ocy;&ncy;</td>
+              <td>1909</td>
+            </tr>
+            <tr>
+              <td>&Pcy;&ocy;&bcy;&iecy;&gcy; &icy;&zcy; &SHcy;&ocy;&ucy;&shcy;&iecy;&ncy;&kcy;&acy;</td>
+              <td>&Dcy;&rcy;&acy;&mcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Scy;&tcy;&icy;&vcy;&iecy;&ncy; &Kcy;&icy;&ncy;&gcy;</td>
+              <td>1982</td>
+            </tr>
+            <tr>
+              <td>&Tcy;&acy;&kcy; &gcy;&ocy;&vcy;&ocy;&rcy;&icy;&lcy; &Zcy;&acy;&rcy;&acy;&tcy;&ucy;&scy;&tcy;&rcy;&acy;</td>
+              <td>&Fcy;&icy;&lcy;&ocy;&scy;&ocy;&vcy;&scy;&kcy;&icy;&jcy; &rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Ncy;&iecy;&mcy;&iecy;&tscy;&kcy;&icy;&jcy;</td>
+              <td>&Fcy;&rcy;&icy;&dcy;&rcy;&icy;&khcy; &Ncy;&icy;&tscy;&shcy;&iecy;</td>
+              <td>1885</td>
+            </tr>
+            <tr>
+              <td>&Vcy;&lcy;&acy;&scy;&tcy;&iecy;&lcy;&icy;&ncy; &Kcy;&ocy;&lcy;&iecy;&tscy;</td>
+              <td>&Fcy;&iecy;&ncy;&tcy;&iecy;&zcy;&icy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&ocy;&ncy; &Tcy;&ocy;&lcy;&kcy;&icy;&ncy;</td>
+              <td>1955</td>
+            </tr>
+            <tr>
+              <td>&Gcy;&ocy;&rcy;&dcy;&ocy;&scy;&tcy;&softcy; &icy; &pcy;&rcy;&iecy;&dcy;&ucy;&bcy;&iecy;&zhcy;&dcy;&iecy;&ncy;&icy;&iecy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&iecy;&jcy;&ncy; &Ocy;&scy;&tcy;&icy;&ncy;</td>
+              <td>1813</td>
+            </tr>
+            <tr>
+              <td>&Acy;&vcy;&tcy;&ocy;&scy;&tcy;&ocy;&pcy;&ocy;&mcy; &pcy;&ocy; &gcy;&acy;&lcy;&acy;&kcy;&tcy;&icy;&kcy;&iecy;</td>
+              <td>&Ncy;&acy;&ucy;&chcy;&ncy;&acy;&yacy; &fcy;&acy;&ncy;&tcy;&acy;&scy;&tcy;&icy;&kcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&ucy;&gcy;&lcy;&acy;&scy; &Acy;&dcy;&acy;&mcy;&scy;</td>
+              <td>1980</td>
+            </tr>
+            <tr>
+              <td>&Dcy;&zhcy;&iecy;&jcy;&ncy; &Ecy;&jcy;&rcy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&SHcy;&acy;&rcy;&lcy;&ocy;&tcy;&tcy;&acy; &Bcy;&rcy;&ocy;&ncy;&tcy;&iecy;</td>
+              <td>1847</td>
+            </tr>
+            <tr>
+              <td>&Gcy;&rcy;&ocy;&zcy;&ocy;&vcy;&ocy;&jcy; &pcy;&iecy;&rcy;&iecy;&vcy;&acy;&lcy;</td>
+              <td>&Dcy;&rcy;&acy;&mcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Ecy;&mcy;&icy;&lcy;&icy; &Bcy;&rcy;&ocy;&ncy;&tcy;&iecy;</td>
+              <td>1847</td>
+            </tr>
+            <tr>
+              <td>&Bcy;&ocy;&lcy;&softcy;&shcy;&icy;&iecy; &ncy;&acy;&dcy;&iecy;&zhcy;&dcy;&ycy;</td>
+              <td>&Acy;&vcy;&tcy;&ocy;&bcy;&icy;&ocy;&gcy;&rcy;&acy;&fcy;&icy;&chcy;&iecy;&scy;&kcy;&icy;&jcy; &rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&CHcy;&acy;&rcy;&lcy;&softcy;&zcy; &Dcy;&icy;&kcy;&kcy;&iecy;&ncy;&scy;</td>
+              <td>1860</td>
+            </tr>
+            <tr>
+              <td>&Ucy;&lcy;&ocy;&vcy;&kcy;&acy;-22</td>
+              <td>&CHcy;&iecy;&rcy;&ncy;&ycy;&jcy; &yucy;&mcy;&ocy;&rcy;, &scy;&acy;&tcy;&icy;&rcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&ocy;&zcy;&iecy;&fcy; &KHcy;&iecy;&lcy;&lcy;&iecy;&rcy;</td>
+              <td>1961</td>
+            </tr>
+            <tr>
+              <td>&Pcy;&iecy;&ncy;&icy;&iecy; &pcy;&tcy;&icy;&tscy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Scy;&iecy;&bcy;&acy;&scy;&tcy;&softcy;&yacy;&ncy; &Fcy;&ocy;&lcy;&kcy;&scy;</td>
+              <td>1993</td>
+            </tr>
+            <tr>
+              <td>&Vcy;&iecy;&tcy;&iecy;&rcy; &vcy; &icy;&vcy;&acy;&khcy;</td>
+              <td>&Scy;&kcy;&acy;&zcy;&ocy;&chcy;&ncy;&acy;&yacy; &pcy;&ocy;&vcy;&iecy;&scy;&tcy;&softcy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Kcy;&iecy;&ncy;&ncy;&iecy;&tcy; &Gcy;&rcy;&iecy;&mcy;</td>
+              <td>1908</td>
+            </tr>
+            <tr>
+              <td>&Tcy;&iecy;&mcy;&ncy;&ycy;&iecy; &ncy;&acy;&chcy;&acy;&lcy;&acy;</td>
+              <td>&Fcy;&iecy;&ncy;&tcy;&iecy;&zcy;&icy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Fcy;&icy;&lcy;&icy;&pcy; &Pcy;&ucy;&lcy;&mcy;&acy;&ncy;</td>
+              <td>1997</td>
+            </tr>
+            <tr>
+              <td>&Mcy;&acy;&lcy;&iecy;&ncy;&softcy;&kcy;&icy;&iecy; &zhcy;&iecy;&ncy;&shchcy;&icy;&ncy;&ycy;</td>
+              <td>&Dcy;&iecy;&tcy;&scy;&kcy;&acy;&yacy; &lcy;&icy;&tcy;&iecy;&rcy;&acy;&tcy;&ucy;&rcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Lcy;&ucy;&icy;&zcy;&acy; &Mcy;&iecy;&jcy; &Ocy;&lcy;&lcy;&kcy;&ocy;&tcy;</td>
+              <td>1868</td>
+            </tr>
+            <tr>
+              <td>&Ucy;&ncy;&iecy;&scy;&iecy;&ncy;&ncy;&ycy;&iecy; &vcy;&iecy;&tcy;&rcy;&ocy;&mcy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;-&ecy;&pcy;&ocy;&pcy;&iecy;&yacy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Mcy;&acy;&rcy;&gcy;&acy;&rcy;&iecy;&tcy; &Mcy;&icy;&tcy;&chcy;&iecy;&lcy;&lcy;</td>
+              <td>1936</td>
+            </tr>
+            <tr>
+              <td>100 &lcy;&iecy;&tcy; &ocy;&dcy;&icy;&ncy;&ocy;&chcy;&iecy;&scy;&tcy;&vcy;&acy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Icy;&scy;&pcy;&acy;&ncy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&#x9;&Gcy;&acy;&bcy;&rcy;&icy;&ecy;&lcy;&softcy; &Gcy;&acy;&rcy;&scy;&icy;&acy; &Mcy;&acy;&rcy;&kcy;&iecy;&scy;</td>
+              <td>1967</td>
+            </tr>
+            <tr>
+              <td>&Acy;&lcy;&icy;&scy;&acy; &vcy; &scy;&tcy;&rcy;&acy;&ncy;&iecy; &CHcy;&ucy;&dcy;&iecy;&scy;</td>
+              <td>&Scy;&kcy;&acy;&zcy;&kcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Lcy;&softcy;&yucy;&icy;&scy; &Kcy;&iecy;&rcy;&rcy;&ocy;&lcy;</td>
+              <td>1865</td>
+            </tr>
+            <tr>
+              <td>&Scy;&tcy;&ocy;&lcy;&pcy;&ycy; &Zcy;&iecy;&mcy;&lcy;&icy;</td>
+              <td>&Icy;&scy;&tcy;&ocy;&rcy;&icy;&chcy;&iecy;&scy;&kcy;&icy;&jcy; &rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Kcy;&iecy;&ncy; &Fcy;&ocy;&lcy;&lcy;&iecy;&tcy;&tcy;</td>
+              <td>1989</td>
+            </tr>
+            <tr>
+              <td>&Rcy;&iecy;&bcy;&iecy;&kcy;&kcy;&acy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&acy;&fcy;&ncy;&acy; &Dcy;&yucy;&mcy;&ocy;&rcy;&softcy;&iecy;&scy;</td>
+              <td>1938</td>
+            </tr>
+            <tr>
+              <td>&Lcy;&iecy;&vcy;, &kcy;&ocy;&lcy;&dcy;&ucy;&ncy;&softcy;&yacy; &icy; &pcy;&lcy;&acy;&tcy;&yacy;&ncy;&ocy;&jcy; &shcy;&kcy;&acy;&fcy;</td>
+              <td>&Fcy;&iecy;&ncy;&tcy;&iecy;&zcy;&icy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Kcy;&lcy;&acy;&jcy;&vcy; &Scy;&tcy;&iecy;&jcy;&pcy;&lcy;&zcy; &Lcy;&softcy;&yucy;&icy;&scy;</td>
+              <td>1950</td>
+            </tr>
+            <tr>
+              <td>&Dcy;&ecy;&vcy;&icy;&dcy; &Kcy;&ocy;&pcy;&pcy;&iecy;&rcy;&fcy;&icy;&lcy;&softcy;&dcy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&CHcy;&acy;&rcy;&lcy;&softcy;&zcy; &Dcy;&icy;&kcy;&kcy;&iecy;&ncy;&scy;</td>
+              <td>1850</td>
+            </tr>
+            <tr>
+              <td>&Ocy;&scy;&tcy;&rcy;&ocy;&vcy; &scy;&ocy;&kcy;&rcy;&ocy;&vcy;&icy;&shchcy;</td>
+              <td>&Pcy;&rcy;&icy;&kcy;&lcy;&yucy;&chcy;&iecy;&ncy;&chcy;&iecy;&scy;&kcy;&icy;&jcy; &rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Rcy;&ocy;&bcy;&iecy;&rcy;&tcy; &Scy;&tcy;&icy;&vcy;&iecy;&ncy;&scy;&ocy;&ncy;</td>
+              <td>1883</td>
+            </tr>
+            <tr>
+              <td>&Dcy;&ocy;&vcy;&ocy;&dcy;&ycy; &rcy;&acy;&scy;&scy;&ucy;&dcy;&kcy;&acy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&iecy;&jcy;&ncy; &Ocy;&scy;&tcy;&icy;&ncy;</td>
+              <td>1818</td>
+            </tr>
+            <tr>
+              <td>&Dcy;&yucy;&ncy;&acy;</td>
+              <td>&Fcy;&acy;&ncy;&tcy;&acy;&scy;&tcy;&icy;&kcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Fcy;&rcy;&ecy;&ncy;&kcy; &Gcy;&iecy;&rcy;&bcy;&iecy;&rcy;&tcy;</td>
+              <td>1965</td>
+            </tr>
+            <tr>
+              <td>&Ecy;&ncy;&ncy; &icy;&zcy; &Zcy;&iecy;&lcy;&iocy;&ncy;&ycy;&khcy; &Kcy;&rcy;&ycy;&shcy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Lcy;&yucy;&scy;&icy; &Mcy;&ocy;&dcy; &Mcy;&ocy;&ncy;&tcy;&gcy;&ocy;&mcy;&iecy;&rcy;&icy;</td>
+              <td>1908</td>
+            </tr>
+            <tr>
+              <td>&Ocy;&bcy;&icy;&tcy;&acy;&tcy;&iecy;&lcy;&icy; &khcy;&ocy;&lcy;&mcy;&ocy;&vcy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;, &scy;&kcy;&acy;&zcy;&kcy;&acy;, &fcy;&ecy;&ncy;&tcy;&iecy;&zcy;&icy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Rcy;&icy;&chcy;&acy;&rcy;&dcy; &Acy;&dcy;&acy;&mcy;&scy;</td>
+              <td>1972</td>
+            </tr>
+            <tr>
+              <td>&Vcy;&iecy;&lcy;&icy;&kcy;&icy;&jcy; &Gcy;&ecy;&tcy;&scy;&bcy;&icy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Fcy;&rcy;&ecy;&ncy;&scy;&icy;&scy; &Scy;&kcy;&ocy;&tcy;&tcy; &Fcy;&icy;&tscy;&dcy;&zhcy;&iecy;&rcy;&acy;&lcy;&softcy;&dcy;</td>
+              <td>1925</td>
+            </tr>
+            <tr>
+              <td>&Gcy;&rcy;&acy;&fcy; &Mcy;&ocy;&ncy;&tcy;&iecy;-&Kcy;&rcy;&icy;&scy;&tcy;&ocy;</td>
+              <td>&Pcy;&rcy;&icy;&kcy;&lcy;&yucy;&chcy;&iecy;&ncy;&chcy;&iecy;&scy;&kcy;&icy;&jcy; &rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Fcy;&rcy;&acy;&ncy;&tscy;&ucy;&zcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Acy;&lcy;&iecy;&kcy;&scy;&acy;&ncy;&dcy;&rcy; &Dcy;&yucy;&mcy;&acy;</td>
+              <td>1846</td>
+            </tr>
+            <tr>
+              <td>&Vcy;&ocy;&zcy;&vcy;&rcy;&acy;&shchcy;&iecy;&ncy;&icy;&iecy; &vcy; &Bcy;&rcy;&acy;&jcy;&dcy;&scy;&khcy;&iecy;&dcy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Icy;&vcy;&lcy;&icy;&ncy; &Vcy;&ocy;</td>
+              <td>1945</td>
+            </tr>
+            <tr>
+              <td>&Scy;&kcy;&ocy;&tcy;&ncy;&ycy;&jcy; &dcy;&vcy;&ocy;&rcy;</td>
+              <td>&Scy;&acy;&tcy;&icy;&rcy;&acy;, &acy;&ncy;&tcy;&icy;&ucy;&tcy;&ocy;&pcy;&icy;&yacy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&ocy;&rcy;&dcy;&zhcy; &Ocy;&rcy;&ucy;&ecy;&lcy;&lcy;</td>
+              <td>1945</td>
+            </tr>
+            <tr>
+              <td>&Rcy;&ocy;&zhcy;&dcy;&iecy;&scy;&tcy;&vcy;&iecy;&ncy;&scy;&kcy;&acy;&yacy; &pcy;&iecy;&scy;&ncy;&softcy;</td>
+              <td>&Pcy;&ocy;&vcy;&iecy;&scy;&tcy;&softcy;-&scy;&kcy;&acy;&zcy;&kcy;&acy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&CHcy;&acy;&rcy;&lcy;&softcy;&zcy; &Dcy;&icy;&kcy;&kcy;&iecy;&ncy;&scy;</td>
+              <td>1843</td>
+            </tr>
+            <tr>
+              <td>&Vcy;&dcy;&acy;&lcy;&icy; &ocy;&tcy; &ocy;&bcy;&iecy;&zcy;&ucy;&mcy;&iecy;&vcy;&shcy;&iecy;&jcy; &tcy;&ocy;&lcy;&pcy;&ycy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Tcy;&ocy;&mcy;&acy;&scy; &KHcy;&acy;&rcy;&dcy;&icy;</td>
+              <td>1874</td>
+            </tr>
+            <tr>
+              <td>&Scy;&pcy;&ocy;&kcy;&ocy;&jcy;&ncy;&ocy;&jcy; &ncy;&ocy;&chcy;&icy;, &mcy;&icy;&scy;&tcy;&iecy;&rcy; &Tcy;&ocy;&mcy;</td>
+              <td>&Icy;&scy;&tcy;&ocy;&rcy;&icy;&chcy;&iecy;&scy;&kcy;&icy;&jcy; &rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Mcy;&icy;&shcy;&iecy;&lcy;&softcy; &Mcy;&acy;&gcy;&ocy;&rcy;&icy;&acy;&ncy;</td>
+              <td>1987</td>
+            </tr>
+            <tr>
+              <td>&Ocy; &mcy;&ycy;&shcy;&acy;&khcy; &icy; &lcy;&yucy;&dcy;&yacy;&khcy;</td>
+              <td>&Pcy;&ocy;&vcy;&iecy;&scy;&tcy;&softcy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Dcy;&zhcy;&ocy;&ncy; &Scy;&tcy;&iecy;&jcy;&ncy;&bcy;&iecy;&kcy;</td>
+              <td>1937</td>
+            </tr>
+            <tr>
+              <td>&Pcy;&rcy;&ocy;&tcy;&icy;&vcy;&ocy;&scy;&tcy;&ocy;&yacy;&ncy;&icy;&iecy;</td>
+              <td>&Pcy;&ocy;&scy;&tcy;&acy;&pcy;&ocy;&kcy;&acy;&lcy;&icy;&pcy;&scy;&icy;&scy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Scy;&tcy;&icy;&vcy;&iecy;&ncy; &Kcy;&icy;&ncy;&gcy;</td>
+              <td>1990</td>
+            </tr>
+            <tr>
+              <td>&Pcy;&rcy;&iecy;&scy;&tcy;&ucy;&pcy;&lcy;&iecy;&ncy;&icy;&iecy; &icy; &ncy;&acy;&kcy;&acy;&zcy;&acy;&ncy;&icy;&iecy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Rcy;&ucy;&scy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Fcy;&iocy;&dcy;&ocy;&rcy; &Dcy;&ocy;&scy;&tcy;&ocy;&iecy;&vcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>1866</td>
+            </tr>
+            <tr>
+              <td>&Mcy;&iecy;&mcy;&ucy;&acy;&rcy;&ycy; &gcy;&iecy;&jcy;&shcy;&icy;&tscy;</td>
+              <td>&Rcy;&ocy;&mcy;&acy;&ncy;</td>
+              <td>&Acy;&ncy;&gcy;&lcy;&icy;&jcy;&scy;&kcy;&icy;&jcy;</td>
+              <td>&Acy;&rcy;&tcy;&ucy;&rcy; &Gcy;&ocy;&lcy;&dcy;&iecy;&ncy;</td>
+              <td>1997</td>
+            </tr>
+          </table>
+          <script src = "js/sortAndGraphic.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
